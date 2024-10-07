@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Empresas</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body class="user-select-none">
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between">
+            <h1 class="text-center">Cadastro de Empresas</h1>
+            <a href="index.html"><button class="btn btn-danger">voltar</button></a>
+            </div>
+        <form id="formulario">
+            <div class="form-group">
+                <label for="nome">Nome da Empresa:</label>
+                <input type="text" class="form-control" id="nome" placeholder="Digite o nome da empresa" required>
+            </div>
+            <div class="form-group">
+                <label for="site">Site da Empresa:</label>
+                <input type="url" class="form-control" id="site" placeholder="Digite o site da empresa" required>
+            </div>
+            <div class="form-group">
+                <label for="instagram">Instagram da Empresa:</label>
+                <input type="url" class="form-control" id="instagram" placeholder="Digite o Instagram da empresa" required>
+            </div>
+            <button type="button" class="btn btn-success btn-block" onclick="cadastrarEmpresa()">Cadastrar Empresa</button>
+        </form>
+
+        <h2 class="mt-5">Empresas Cadastradas:</h2>
+        <ul id="listaEmpresas" class="list-group mt-3"></ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<script>
+
+    function cadastrarEmpresa() {
+        const nome = document.getElementById("nome").value;
+        const site = document.getElementById("site").value;
+        const instagram = document.getElementById("instagram").value;
+    
+        if (!nome || !site || !instagram) {
+            alert("Por favor, preencha todos os campos.");
+            return;
+        }
+    
+        const listaEmpresas = document.getElementById("listaEmpresas");
+        const li = document.createElement("li");
+        li.className = "list-group-item";
+    
+        li.innerHTML = `
+            <strong>${nome}</strong><br>
+            <a href="${site}" target="_blank">Site</a> | 
+            <a href="${instagram}" target="_blank">Instagram</a>
+        `;
+    
+        listaEmpresas.appendChild(li);
+    
+        document.getElementById("formulario").reset();
+    }
+    
+    
+    </script>
+    

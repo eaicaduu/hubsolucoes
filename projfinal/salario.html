@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Funcionários</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between">
+            <h1 class="text-center">Cadastro de Funcionários</h1>
+            <a href="index.html"><button class="btn btn-danger">voltar</button></a>
+            </div>
+        <form id="formulario">
+            <div class="form-group">
+                <label for="nome">Nome do Funcionário:</label>
+                <input type="text" class="form-control" id="nome" placeholder="Digite o nome" required>
+            </div>
+            <div class="form-group">
+                <label for="salario">Salário Base (R$):</label>
+                <input type="number" class="form-control" id="salario" placeholder="Digite o salário base" required>
+            </div>
+            <div class="form-group">
+                <label for="he">Horas Extras (R$):</label>
+                <input type="number" class="form-control" id="he" placeholder="Digite o valor de horas extras" required>
+            </div>
+            <div class="form-group">
+                <label for="insalubridade">Insalubridade (R$):</label>
+                <input type="number" class="form-control" id="insalubridade" placeholder="Digite o valor de insalubridade" required>
+            </div>
+            <div class="form-group">
+                <label for="periculosidade">Periculosidade (R$):</label>
+                <input type="number" class="form-control" id="periculosidade" placeholder="Digite o valor de periculosidade" required>
+            </div>
+            <div class="form-group">
+                <label for="inss">Deduções de INSS (R$):</label>
+                <input type="number" class="form-control" id="inss" placeholder="Digite o valor de INSS" required>
+            </div>
+            <div class="form-group">
+                <label for="irpf">Deduções de IRPF (R$):</label>
+                <input type="number" class="form-control" id="irpf" placeholder="Digite o valor de IRPF" required>
+            </div>
+            <div class="form-group">
+                <label for="vt">Deduções de VT (R$):</label>
+                <input type="number" class="form-control" id="vt" placeholder="Digite o valor de VT" required>
+            </div>
+            <button type="button" class="btn btn-success btn-block" onclick="cadastrarFuncionario()">Cadastrar Funcionário</button>
+        </form>
+
+        <h2 class="mt-5">Funcionários Cadastrados:</h2>
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Salário Base</th>
+                    <th>HE</th>
+                    <th>Insalubridade</th>
+                    <th>Periculosidade</th>
+                    <th>INSS</th>
+                    <th>IRPF</th>
+                    <th>VT</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaFuncionarios"></tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<script>
+
+function cadastrarFuncionario() {
+    const nome = document.getElementById("nome").value;
+    const salario = parseFloat(document.getElementById("salario").value) || 0;
+    const he = parseFloat(document.getElementById("he").value) || 0;
+    const insalubridade = parseFloat(document.getElementById("insalubridade").value) || 0;
+    const periculosidade = parseFloat(document.getElementById("periculosidade").value) || 0;
+    const inss = parseFloat(document.getElementById("inss").value) || 0;
+    const irpf = parseFloat(document.getElementById("irpf").value) || 0;
+    const vt = parseFloat(document.getElementById("vt").value) || 0;
+
+    const total = salario + he + insalubridade + periculosidade - (inss + irpf + vt);
+
+    const tabelaFuncionarios = document.getElementById("tabelaFuncionarios");
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+        <td>${nome}</td>
+        <td>${salario.toFixed(2)}</td>
+        <td>${he.toFixed(2)}</td>
+        <td>${insalubridade.toFixed(2)}</td>
+        <td>${periculosidade.toFixed(2)}</td>
+        <td>${inss.toFixed(2)}</td>
+        <td>${irpf.toFixed(2)}</td>
+        <td>${vt.toFixed(2)}</td>
+        <td>${total.toFixed(2)}</td>
+    `;
+
+    tabelaFuncionarios.appendChild(tr);
+
+    document.getElementById("formulario").reset();
+}
+
+
+</script>

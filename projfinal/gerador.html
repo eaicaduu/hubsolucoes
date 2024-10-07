@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Seis Dezenas</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="user-select-none">
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between">
+            <h1 class="text-center">Gerador de Seis Dezenas</h1>
+            <a href="index.html"><button class="btn btn-danger">voltar</button></a>
+            </div>
+        <button class="btn btn-primary btn-block" onclick="gerarDezenas()">Gerar Dezenas</button>
+        <div id="resultado" class="mt-4 text-center display-4"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<script>
+
+function gerarDezenas() {
+    const dezenas = new Set();
+
+    while (dezenas.size < 6) {
+        const numero = Math.floor(Math.random() * 60) + 1;
+        dezenas.add(numero);
+    }
+
+    const resultado = Array.from(dezenas).sort((a, b) => a - b);
+    document.getElementById("resultado").innerText = `Dezenas geradas: ${resultado.join(', ')}`;
+}
+
+
+</script>

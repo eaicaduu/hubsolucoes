@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Pessoas</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body class="user-select-none">
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between">
+            <h1 class="text-center">Cadastro de Pessoas</h1>
+            <a href="index.html"><button class="btn btn-danger">voltar</button></a>
+            </div>
+        <form id="formulario">
+            <div class="form-group">
+                <label for="altura">Altura (cm):</label>
+                <input type="number" class="form-control" id="altura" placeholder="Digite a altura em cm" required>
+            </div>
+            <div class="form-group">
+                <label for="peso">Peso (kg):</label>
+                <input type="number" class="form-control" id="peso" placeholder="Digite o peso em kg" required>
+            </div>
+            <button type="button" class="btn btn-success btn-block" onclick="cadastrarPessoa()">Cadastrar Pessoa</button>
+        </form>
+
+        <h2 class="mt-5">Pessoas Cadastradas:</h2>
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>Altura (cm)</th>
+                    <th>Peso (kg)</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaPessoas"></tbody>
+        </table>
+
+        <h3 class="mt-4" id="mediaResultados"></h3>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<script>
+
+let totalAltura = 0;
+let totalPeso = 0;
+let contagemPessoas = 0;
+
+function cadastrarPessoa() {
+    const altura = parseFloat(document.getElementById("altura").value);
+    const peso = parseFloat(document.getElementById("peso").value);
+
+    if (isNaN(altura) || isNaN(peso) || altura <= 0 || peso <= 0) {
+        alert("Por favor, insira valores válidos para altura e peso.");
+        return;
+    }
+
+    const tabelaPessoas = document.getElementById("tabelaPessoas");
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+        <td>${altura}</td>
+        <td>${peso}</td>
+    `;
+
+    tabelaPessoas.appendChild(tr);
+
+    totalAltura += altura;
+    totalPeso += peso;
+    contagemPessoas++;
+
+    atualizarMedia();
+    
+    document.getElementById("formulario").reset();
+}
+
+function atualizarMedia() {
+    const mediaAltura = (totalAltura / contagemPessoas).toFixed(2);
+    const mediaPeso = (totalPeso / contagemPessoas).toFixed(2);
+    
+    document.getElementById("mediaResultados").innerText = `Média de Altura: ${mediaAltura} cm | Média de Peso: ${mediaPeso} kg`;
+}
+
+
+</script>
